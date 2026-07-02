@@ -1,27 +1,30 @@
-import Button from '../../components/Button/Button.jsx';
-import Container from '../../components/Container/Container.jsx';
-import IconGlyph from '../../components/IconGlyph/IconGlyph.jsx';
+import { Rocket } from 'lucide-react';
 import './CTA.css';
 
-function CTA() {
+const CTA = () => {
   return (
-    <section className="cta" id="contact" aria-labelledby="cta-title">
-      <Container>
-        <div className="cta__inner">
-          <span className="cta__icon">
-            <IconGlyph color="navy" name="rocket" />
-          </span>
-          <div>
-            <h2 id="cta-title">More projects are currently in development.</h2>
-            <p>Let’s build the next digital solution together.</p>
+    <section className="cta">
+      <div className="cta-container">
+        <div className="cta-content">
+          <div className="cta-icon">
+            <Rocket size={28} strokeWidth={2} />
           </div>
-          <Button href="mailto:hello@dcstack.io" variant="accent">
+          <div className="cta-text">
+            <h3>More projects are currently in development.</h3>
+            <p>Let's build the next digital solution together.</p>
+          </div>
+          <a href="#contact" className="cta-button">
             Contact Us
-          </Button>
+            <span className="cta-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M13 5l7 7-7 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </a>
         </div>
-      </Container>
+      </div>
     </section>
   );
-}
+};
 
 export default CTA;

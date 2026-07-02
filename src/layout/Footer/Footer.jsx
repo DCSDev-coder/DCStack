@@ -39,7 +39,9 @@ function Footer() {
     <footer className="site-footer">
       <Container className="site-footer__inner">
         <div className="site-footer__brand">
-          <BrandLogo tone="light" />
+          <div className="site-footer__logo-wrapper">
+            <BrandLogo />
+          </div>
           <p>Technology development that powers modern businesses and drives the future forward.</p>
         </div>
         {footerGroups.map((group) => (
@@ -58,12 +60,12 @@ function Footer() {
           <h2>Connect</h2>
           <ul>
             <li>
-              <a href="mailto:hello@dcstack.io">hello@dcstack.io</a>
+              <a href="mailto:sales@dcstack.my">sales@dcstack.my</a>
             </li>
             <li>
-              <a href="tel:+622112345678">+62 21 1234 5678</a>
+              <a href="tel:+622112345678">+0378000511</a>
             </li>
-            <li>Jakarta, Indonesia</li>
+            <li>Eco Forest, Semenyih, Selangor</li>
           </ul>
         </div>
       </Container>

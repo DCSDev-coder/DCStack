@@ -1,0 +1,30 @@
+.tech-circuit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 250%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tech-circuit__path {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.6;
+}
+
+.tech-circuit__dot {
+  filter: drop-shadow(0 0 6px rgba(140, 198, 63, 0.8));
+}
+
+.tech-circuit__dot--glow-orange {
+  filter: drop-shadow(0 0 6px rgba(244, 107, 37, 0.8));
+}
+
+.tech-circuit__dot--glow-blue {
+  filter: drop-shadow(0 0 6px rgba(11, 31, 58, 0.6));
+}

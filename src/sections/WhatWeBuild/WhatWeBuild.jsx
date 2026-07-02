@@ -1,38 +1,38 @@
-import Card from '../../components/Card/Card.jsx';
 import Container from '../../components/Container/Container.jsx';
 import SectionHeading from '../../components/SectionHeading/SectionHeading.jsx';
+import { Smartphone, AppWindow, PieChart, Activity, Settings } from 'lucide-react';
 import './WhatWeBuild.css';
 
 const services = [
   {
-    icon: 'mobile',
+    Icon: Smartphone,
     title: 'Mobile Applications',
     body: 'Engaging and scalable mobile apps for iOS and Android.',
-    accent: 'green',
+    color: '#16a34a',
   },
   {
-    icon: 'website',
+    Icon: AppWindow,
     title: 'Website Systems',
     body: 'Robust and modern web systems tailored to your business.',
-    accent: 'navy',
+    color: '#1e3a8a',
   },
   {
-    icon: 'dashboard',
+    Icon: PieChart,
     title: 'Admin Dashboards',
     body: 'Insightful dashboards for data-driven decision making.',
-    accent: 'orange',
+    color: '#f97316',
   },
   {
-    icon: 'monitor',
+    Icon: Activity,
     title: 'Monitoring Platforms',
     body: 'Real-time monitoring solutions for systems and infrastructure.',
-    accent: 'green',
+    color: '#16a34a',
   },
   {
-    icon: 'custom',
+    Icon: Settings,
     title: 'Custom Digital Solutions',
     body: 'End-to-end custom solutions built for your unique challenges.',
-    accent: 'navy',
+    color: '#1e3a8a',
   },
 ];
 
@@ -47,9 +47,16 @@ function WhatWeBuild() {
         />
         <div className="build__grid">
           {services.map((service) => (
-            <Card accent={service.accent} icon={service.icon} key={service.title} title={service.title}>
-              {service.body}
-            </Card>
+            <div className="build-card" key={service.title}>
+              <div 
+                className="build-card__icon-wrapper" 
+                style={{ color: service.color, borderColor: service.color + '40' }}
+              >
+                <service.Icon strokeWidth={1.5} size={28} />
+              </div>
+              <h3 className="build-card__title">{service.title}</h3>
+              <p className="build-card__body">{service.body}</p>
+            </div>
           ))}
         </div>
       </Container>
