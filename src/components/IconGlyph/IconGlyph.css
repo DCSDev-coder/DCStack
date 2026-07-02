@@ -1,0 +1,27 @@
+.icon-glyph {
+  --icon-color: var(--color-green);
+  align-items: center;
+  display: inline-flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.icon-glyph--navy {
+  --icon-color: var(--color-navy);
+}
+
+.icon-glyph--orange {
+  --icon-color: var(--color-orange);
+}
+
+.icon-glyph svg {
+  display: block;
+  fill: none;
+  height: 100%;
+  stroke: var(--icon-color);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+  width: 100%;
+}

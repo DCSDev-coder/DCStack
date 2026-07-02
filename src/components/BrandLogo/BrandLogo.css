@@ -1,0 +1,61 @@
+.brand-logo {
+  align-items: center;
+  color: var(--color-navy);
+  display: inline-flex;
+  gap: 0.9rem;
+  text-decoration: none;
+}
+
+.brand-logo__mark {
+  aspect-ratio: 0.96;
+  display: inline-block;
+  flex: 0 0 auto;
+  position: relative;
+  width: 54px;
+}
+
+.brand-logo__layer {
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.brand-logo__layer--top {
+  top: 0;
+}
+
+.brand-logo__layer--middle {
+  top: 42%;
+}
+
+.brand-logo__layer--bottom {
+  top: 64%;
+}
+
+.brand-logo__text {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.brand-logo strong {
+  color: currentColor;
+  font-size: clamp(1.4rem, 2.3vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.brand-logo small {
+  color: var(--color-green);
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.brand-logo--light {
+  color: var(--color-white);
+}
+
+.site-header .brand-logo__mark {
+  width: 50px;
+}

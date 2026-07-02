@@ -1,0 +1,54 @@
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  justify-items: center;
+  display: grid;
+  gap: 0.85rem;
+  min-height: 238px;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+}
+
+.card__icon {
+  align-items: center;
+  background: #f2f5f8;
+  border-radius: 50%;
+  display: inline-flex;
+  height: 70px;
+  justify-content: center;
+  width: 70px;
+}
+
+.card__accent {
+  background: var(--color-green);
+  border-radius: var(--radius-pill);
+  display: block;
+  height: 2px;
+  order: 3;
+  width: 36px;
+}
+
+.card--orange .card__accent {
+  background: var(--color-orange);
+}
+
+.card--navy .card__accent {
+  background: var(--color-navy);
+}
+
+.card h3 {
+  color: var(--color-navy);
+  font-size: 1rem;
+  font-weight: 850;
+  line-height: 1.2;
+  order: 2;
+}
+
+.card p {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  order: 4;
+}
