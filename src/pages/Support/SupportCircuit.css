@@ -1,0 +1,41 @@
+.support-circuit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.support-circuit__dot {
+  filter: drop-shadow(0 0 8px rgba(140, 198, 63, 0.9));
+}
+
+.support-circuit__dot--orange {
+  filter: drop-shadow(0 0 8px rgba(244, 107, 37, 0.9));
+}
+
+.support-circuit__dot--white {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+}
+
+.support-circuit__pulse {
+  animation: pulse-ring 2.5s ease-out infinite;
+  transform-origin: center;
+}
+
+.support-circuit__pulse--delay {
+  animation-delay: 1.25s;
+}
+
+@keyframes pulse-ring {
+  0% {
+    r: 6px;
+    opacity: 0.8;
+  }
+  100% {
+    r: 28px;
+    opacity: 0;
+  }
+}

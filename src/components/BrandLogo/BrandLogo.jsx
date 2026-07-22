@@ -1,9 +1,10 @@
 import bottom from '../../assets/logo/curve-bottom.svg';
 import middle from '../../assets/logo/curve-middle.svg';
 import top from '../../assets/logo/curve-top.svg';
+import DecodedText from '../DecodedText/DecodedText.jsx';
 import './BrandLogo.css';
 
-function BrandLogo({ tone = 'dark' }) {
+function BrandLogo({ tone = 'dark', withSubtitle = false }) {
   return (
     <span className={`brand-logo brand-logo--${tone}`} aria-label="DCStack">
       <span className="brand-logo__mark" aria-hidden="true">
@@ -12,8 +13,8 @@ function BrandLogo({ tone = 'dark' }) {
         <img src={bottom} alt="" className="brand-logo__layer brand-logo__layer--bottom" />
       </span>
       <span className="brand-logo__text">
-        <strong>DCSTACK</strong>
-        {tone === 'light' ? <small>Data Center Specialists</small> : null}
+        <strong><DecodedText text="DCSTACK" /></strong>
+        {(withSubtitle || tone === 'light') ? <small>Data Center Specialists</small> : null}
       </span>
     </span>
   );

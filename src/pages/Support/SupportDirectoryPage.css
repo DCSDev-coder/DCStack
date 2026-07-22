@@ -8,6 +8,13 @@
     linear-gradient(135deg, var(--color-navy), var(--color-navy-deep));
   color: var(--color-white);
   padding-block: clamp(4rem, 9vw, 7rem);
+  overflow: hidden;
+  position: relative;
+}
+
+.support-directory__hero > .container {
+  position: relative;
+  z-index: 1;
 }
 
 .support-directory__hero h1 {
@@ -56,11 +63,50 @@
 }
 
 .support-directory__grid article {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
+  border: none;
+  background: var(--color-border);
   border-radius: 22px;
   box-shadow: var(--shadow-card);
+  overflow: hidden;
   padding: clamp(1.5rem, 4vw, 2.7rem);
+  position: relative;
+}
+
+.support-directory__grid article::before {
+  animation: support-beam 10s ease-in-out infinite;
+  background: conic-gradient(
+    transparent 70%,
+    var(--color-orange) 85%,
+    var(--color-green) 100%
+  );
+  content: '';
+  height: 200%;
+  left: -50%;
+  position: absolute;
+  top: -50%;
+  width: 200%;
+  z-index: 0;
+}
+
+.support-directory__grid article::after {
+  background: var(--color-white);
+  border-radius: 20px;
+  content: '';
+  inset: 2px;
+  position: absolute;
+  z-index: 1;
+}
+
+.support-directory__grid article > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes support-beam {
+  0% { transform: rotate(0deg); }
+  35% { transform: rotate(210deg); }
+  70% { transform: rotate(150deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .support-directory__project-mark {

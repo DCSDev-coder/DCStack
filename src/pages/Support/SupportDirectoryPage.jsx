@@ -1,11 +1,13 @@
 import Container from '../../components/Container/Container.jsx';
 import { projects } from '../../data/projects.js';
+import SupportCircuit from './SupportCircuit.jsx';
 import './SupportDirectoryPage.css';
 
 function SupportDirectoryPage() {
   return (
     <div className="support-directory">
       <section className="support-directory__hero">
+        <SupportCircuit />
         <Container>
           <p className="page-eyebrow">DCStack support centre</p>
           <h1>Support for each product.</h1>

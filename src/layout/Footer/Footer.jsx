@@ -39,7 +39,7 @@ function Footer() {
       <Container className="site-footer__inner">
         <div className="site-footer__brand">
           <div className="site-footer__logo-wrapper">
-            <BrandLogo tone="light" />
+            <BrandLogo tone="dark" withSubtitle={true} />
           </div>
           <p>Practical software that helps modern businesses work better.</p>
         </div>

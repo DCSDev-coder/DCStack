@@ -1,17 +1,23 @@
 import Container from '../../components/Container/Container.jsx';
+import SmartRackCircuit from './SmartRackCircuit.jsx';
 import './SmartRackPages.css';
 
+import { UserCircle, Bell, Lock, Activity } from 'lucide-react';
+
 const supportItems = [
-  ['Sign-in or account access', 'Contact your DCS administrator to check that your account, site, and permissions are active.'],
-  ['Notifications', 'Confirm that notifications are allowed in your device settings and that you are signed in to the correct account.'],
-  ['Door access', 'Door controls need permission and an extra security check. If access fails, tell us the site, door name, time, and message shown.'],
-  ['Monitoring data', 'If equipment appears offline, tell us the site, equipment name, time, and include a screenshot if possible.'],
+  ['Sign-in or account access', 'Contact your DCS administrator to check that your account, site, and permissions are active.', UserCircle],
+  ['Notifications', 'Confirm that notifications are allowed in your device settings and that you are signed in to the correct account.', Bell],
+  ['Door access', 'Door controls need permission and an extra security check. If access fails, tell us the site, door name, time, and message shown.', Lock],
+  ['Monitoring data', 'If equipment appears offline, tell us the site, equipment name, time, and include a screenshot if possible.', Activity],
 ];
 
 function SmartRackSupportPage() {
   return (
     <div className="support-page">
       <section className="support-page__hero">
+        <div className="support-page__hero-circuit">
+          <SmartRackCircuit />
+        </div>
         <Container>
           <p className="page-eyebrow">DCS Smart Rack Monitoring</p>
           <h1>Smart Rack support</h1>
@@ -26,10 +32,15 @@ function SmartRackSupportPage() {
         <Container>
           <a className="support-page__back" href="/support">All project support</a>
           <div className="support-page__grid">
-            {supportItems.map(([title, description]) => (
+            {supportItems.map(([title, description, Icon]) => (
               <article key={title}>
-                <h2>{title}</h2>
-                <p>{description}</p>
+                <div className="support-page__bg-icon">
+                  <Icon size={160} strokeWidth={1} />
+                </div>
+                <div className="support-page__content-inner">
+                  <h2>{title}</h2>
+                  <p>{description}</p>
+                </div>
               </article>
             ))}
           </div>

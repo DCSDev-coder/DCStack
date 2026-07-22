@@ -23,4 +23,9 @@
   --shadow-card: 0 18px 42px rgb(11 31 58 / 8%);
   --shadow-strong: 0 28px 80px rgb(11 31 58 / 24%);
   --transition-fast: 180ms ease;
+
+  /* Standardized Page & Section Paddings */
+  --section-padding-y: clamp(3.5rem, 7vw, 6rem);
+  --hero-padding-top: clamp(2rem, 4vw, 3rem);
+  --hero-padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
 }

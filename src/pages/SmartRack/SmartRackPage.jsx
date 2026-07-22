@@ -1,13 +1,14 @@
 import Container from '../../components/Container/Container.jsx';
+import { Eye, Monitor, Lock, Smartphone } from 'lucide-react';
 import dashboardPreview from '../../assets/images/Dashboard_Monitor/Dashboard.png';
 import systemHealthPreview from '../../assets/images/Dashboard_Monitor/System Health.png';
 import './SmartRackPages.css';
 
 const capabilities = [
-  ['One clear view', 'See important rack information in one place on the smart rack display or mobile app.'],
-  ['Modern display', 'The on-site display uses a cleaner layout that is easier to read and use.'],
-  ['Secure controls', 'Only approved users can use sensitive controls.'],
-  ['Monitor anywhere', 'Check rack activity from the on-site display or a supported mobile device.'],
+  ['One clear view', 'See important rack information in one place on the smart rack display or mobile app.', Eye],
+  ['Modern display', 'The on-site display uses a cleaner layout that is easier to read and use.', Monitor],
+  ['Secure controls', 'Only approved users can use sensitive controls.', Lock],
+  ['Monitor anywhere', 'Check rack activity from the on-site display or a supported mobile device.', Smartphone],
 ];
 
 function SmartRackPage() {
@@ -52,11 +53,16 @@ function SmartRackPage() {
             <h2>A clear view on the rack display and your phone</h2>
           </div>
           <div className="product-capabilities__grid">
-            {capabilities.map(([title, description], index) => (
+            {capabilities.map(([title, description, Icon], index) => (
               <article key={title}>
-                <span>0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
+                <div className="product-capabilities__bg-icon">
+                  <Icon size={160} strokeWidth={1} />
+                </div>
+                <div className="product-capabilities__content">
+                  <span>0{index + 1}</span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
               </article>
             ))}
           </div>

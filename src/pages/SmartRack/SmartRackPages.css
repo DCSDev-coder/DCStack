@@ -45,12 +45,11 @@
 }
 
 .product-hero__inner {
-  align-items: center;
+  align-items: start;
   display: grid;
   gap: clamp(2rem, 7vw, 6rem);
   grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-  min-height: 650px;
-  padding-block: clamp(4rem, 9vw, 7.5rem);
+  padding-block: var(--hero-padding-top) var(--hero-padding-bottom);
 }
 
 .product-hero h1,
@@ -123,7 +122,7 @@
   line-height: 1.05;
 }
 
-.product-hero__panel > p {
+.product-hero__panel>p {
   color: var(--color-text-on-dark);
   font-size: 0.86rem;
   position: relative;
@@ -180,7 +179,7 @@
 .product-capabilities,
 .support-page__content,
 .product-downloads {
-  padding-block: clamp(4rem, 8vw, 7rem);
+  padding-block: var(--section-padding-y);
 }
 
 .page-heading {
@@ -204,11 +203,54 @@
 
 .product-capabilities__grid article,
 .support-page__grid article {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
+  border: none;
+  background: var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
+  overflow: hidden;
   padding: clamp(1.5rem, 4vw, 2.5rem);
+  position: relative;
+}
+
+.product-capabilities__grid article::before,
+.support-page__grid article::before {
+  animation: random-beam 8s ease-in-out infinite;
+  background: conic-gradient(transparent 75%,
+      var(--color-green) 100%);
+  content: '';
+  height: 200%;
+  left: -50%;
+  position: absolute;
+  top: -50%;
+  width: 200%;
+  z-index: 0;
+}
+
+.product-capabilities__grid article::after,
+.support-page__grid article::after {
+  background: var(--color-white);
+  border-radius: calc(var(--radius-lg) - 2px);
+  content: '';
+  inset: 2px;
+  position: absolute;
+  z-index: 1;
+}
+
+.product-capabilities__bg-icon,
+.support-page__bg-icon {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  color: var(--color-navy);
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.product-capabilities__content,
+.support-page__content-inner {
+  position: relative;
+  z-index: 3;
 }
 
 .product-capabilities__grid span {
@@ -221,13 +263,43 @@
 .support-page__grid h2 {
   color: var(--color-navy);
   font-size: 1.35rem;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
 }
 
 .product-capabilities__grid p,
 .support-page__grid p {
   color: var(--color-text-muted);
   margin-top: 0.75rem;
+}
+
+@keyframes random-beam {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(160deg);
+    animation-timing-function: ease-out;
+  }
+
+  40% {
+    transform: rotate(120deg);
+    animation-timing-function: ease-in-out;
+  }
+
+  65% {
+    transform: rotate(300deg);
+    animation-timing-function: ease-in-out;
+  }
+
+  85% {
+    transform: rotate(260deg);
+    animation-timing-function: ease-in-out;
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .product-availability {
@@ -256,7 +328,7 @@
   margin-top: 0.7rem;
 }
 
-.product-downloads__heading > p {
+.product-downloads__heading>p {
   color: var(--color-text-on-dark);
   max-width: 460px;
 }
@@ -279,7 +351,7 @@
   padding: clamp(1.2rem, 4vw, 1.8rem);
 }
 
-.product-downloads__grid article > span {
+.product-downloads__grid article>span {
   align-items: center;
   background: var(--color-white);
   border-radius: 12px;
@@ -302,7 +374,7 @@
   margin-top: 0.25rem;
 }
 
-.product-downloads__grid article > strong {
+.product-downloads__grid article>strong {
   background: rgb(140 198 63 / 15%);
   border: 1px solid rgb(140 198 63 / 45%);
   border-radius: var(--radius-pill);
@@ -314,7 +386,7 @@
 
 .document-page {
   background: linear-gradient(180deg, var(--color-surface), var(--color-white) 32%);
-  padding-block: clamp(3rem, 7vw, 6rem);
+  padding-block: var(--section-padding-y);
 }
 
 .document-page__layout {
@@ -336,7 +408,7 @@
   margin-top: 0.75rem;
 }
 
-.document-page__summary > p:last-of-type {
+.document-page__summary>p:last-of-type {
   color: var(--color-text-muted);
   margin-top: 1rem;
 }
@@ -396,7 +468,76 @@
     linear-gradient(115deg, var(--color-navy), var(--color-navy-deep)),
     var(--color-navy);
   color: var(--color-white);
-  padding-block: clamp(4rem, 9vw, 7rem);
+  padding-block: var(--hero-padding-top) var(--hero-padding-bottom);
+  overflow: hidden;
+  position: relative;
+}
+
+.support-page__hero::before {
+  animation: support-hero-float 8s ease-in-out infinite;
+  background:
+    linear-gradient(90deg, rgb(255 255 255 / 18%) 1px, transparent 1px),
+    linear-gradient(rgb(255 255 255 / 18%) 1px, transparent 1px);
+  background-size: 52px 52px;
+  content: '';
+  height: 420px;
+  opacity: 0.6;
+  position: absolute;
+  right: -8rem;
+  top: 1rem;
+  transform: rotate(18deg);
+  width: 520px;
+  pointer-events: none;
+}
+
+.support-page__hero::after {
+  animation: support-hero-float 10s ease-in-out infinite reverse;
+  background:
+    repeating-radial-gradient(ellipse at 12% 100%, transparent 0 20px, rgb(255 255 255 / 12%) 21px 22px);
+  bottom: -7rem;
+  content: '';
+  height: 220px;
+  left: 0;
+  opacity: 0.8;
+  position: absolute;
+  width: 58%;
+  pointer-events: none;
+}
+
+.support-page__hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.support-page__hero-circuit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.support-page__hero-circuit .smart-rack-circuit {
+  width: 100%;
+  height: 100%;
+  transform: none;
+  top: 0;
+  left: 0;
+}
+
+@keyframes support-hero-float {
+
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -24px;
+  }
 }
 
 .support-page__hero h1 {
@@ -404,7 +545,7 @@
   max-width: 900px;
 }
 
-.support-page__hero > .container > p:not(.page-eyebrow) {
+.support-page__hero>.container>p:not(.page-eyebrow) {
   color: var(--color-text-on-dark);
   font-size: 1.12rem;
   margin-top: 1.4rem;
@@ -480,6 +621,7 @@
 }
 
 @media (max-width: 780px) {
+
   .product-hero__inner,
   .document-page__layout {
     grid-template-columns: 1fr;
@@ -537,7 +679,7 @@
     grid-template-columns: auto 1fr;
   }
 
-  .product-downloads__grid article > strong {
+  .product-downloads__grid article>strong {
     grid-column: 2;
     justify-self: start;
   }
