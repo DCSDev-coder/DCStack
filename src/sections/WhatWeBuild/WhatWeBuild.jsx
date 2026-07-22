@@ -6,32 +6,32 @@ import './WhatWeBuild.css';
 const services = [
   {
     Icon: Smartphone,
-    title: 'Mobile Applications',
-    body: 'Engaging and scalable mobile apps for iOS and Android.',
+    title: 'Business Applications',
+    body: 'Mobile and desktop tools built for daily work.',
     color: '#16a34a',
   },
   {
     Icon: AppWindow,
-    title: 'Website Systems',
-    body: 'Robust and modern web systems tailored to your business.',
+    title: 'Ordering Systems',
+    body: 'Simple and reliable ordering systems for teams and customers.',
     color: '#1e3a8a',
   },
   {
     Icon: PieChart,
-    title: 'Admin Dashboards',
-    body: 'Insightful dashboards for data-driven decision making.',
+    title: 'POS & Sales Systems',
+    body: 'Sales and transaction tools that help teams track business activity.',
     color: '#f97316',
   },
   {
     Icon: Activity,
-    title: 'Monitoring Platforms',
-    body: 'Real-time monitoring solutions for systems and infrastructure.',
+    title: 'Operations Platforms',
+    body: 'Monitoring and admin systems that keep daily work organized.',
     color: '#16a34a',
   },
   {
     Icon: Settings,
-    title: 'Custom Digital Solutions',
-    body: 'End-to-end custom solutions built for your unique challenges.',
+    title: 'Finance Workflows',
+    body: 'Internal tools for finance tasks, reports, and approvals.',
     color: '#1e3a8a',
   },
 ];
@@ -43,7 +43,7 @@ function WhatWeBuild() {
         <SectionHeading
           eyebrow="What we build"
           id="build-title"
-          title="Digital Solutions That Deliver Value"
+          title="Software That Fits the Way Your Business Works"
         />
         <div className="build__grid">
           {services.map((service) => (

@@ -4,41 +4,57 @@ import Container from '../../components/Container/Container.jsx';
 import './Header.css';
 
 const navItems = [
-  { label: 'Home', href: '#top' },
-  { label: 'About', href: '#about' },
-  { label: 'Solutions', href: '#build' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/#top', sectionId: 'top' },
+  { label: 'About', href: '/#about', sectionId: 'about' },
+  { label: 'Projects', href: '/#projects', sectionId: 'projects' },
+  { label: 'Capabilities', href: '/#build', sectionId: 'build' },
+  { label: 'Contact', href: '/#contact', sectionId: 'contact' },
 ];
 
 function Header() {
-  const [activeSection, setActiveSection] = useState('#top');
+  const isLandingPage = window.location.pathname === '/';
+  const [activeHref, setActiveHref] = useState(isLandingPage ? '/#top' : '/#projects');
+  const [isScrolled, setIsScrolled] = useState(window.scrollY > 12);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 120;
+    let animationFrame;
 
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
-        setActiveSection('#contact');
-        return;
+    const updateActiveSection = () => {
+      animationFrame = undefined;
+      setIsScrolled(window.scrollY > 12);
+
+      if (!isLandingPage) return;
+
+      const viewportMarker = Math.min(180, window.innerHeight * 0.28);
+      const nearPageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+      let currentHref = '/#top';
+
+      for (const item of navItems) {
+        const section = document.getElementById(item.sectionId);
+        if (section && section.getBoundingClientRect().top <= viewportMarker) {
+          currentHref = item.href;
+        }
       }
 
-      const sections = navItems.map(item => {
-        const element = document.getElementById(item.href.substring(1));
-        return { id: item.href, offset: element ? element.offsetTop : 0 };
-      });
-
-      const sortedSections = [...sections].sort((a, b) => b.offset - a.offset);
-      const currentSection = sortedSections.find(section => scrollPosition >= section.offset);
-
-      if (currentSection) setActiveSection(currentSection.id);
+      if (nearPageBottom) currentHref = '/#contact';
+      setActiveHref(currentHref);
     };
 
+    const handleScroll = () => {
+      if (!animationFrame) animationFrame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
+  }, [isLandingPage]);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -50,12 +66,15 @@ function Header() {
     return () => document.removeEventListener('click', handleClick);
   }, [menuOpen]);
 
-  const handleNavClick = () => setMenuOpen(false);
+  const handleNavClick = (href) => {
+    setActiveHref(href);
+    setMenuOpen(false);
+  };
 
   return (
-    <header className="site-header">
+    <header className={`site-header${isScrolled ? ' is-scrolled' : ''}`}>
       <Container className="site-header__inner">
-        <a aria-label="DCStack home" className="site-header__logo" href="#top">
+        <a aria-label="DCStack home" className="site-header__logo" href="/#top">
           <BrandLogo />
         </a>
 
@@ -63,9 +82,11 @@ function Header() {
         <nav aria-label="Primary navigation" className="site-header__nav">
           {navItems.map((item) => (
             <a
-              className={activeSection === item.href ? 'is-active' : undefined}
+              aria-current={activeHref === item.href ? 'location' : undefined}
+              className={activeHref === item.href ? 'is-active' : undefined}
               href={item.href}
               key={item.href}
+              onClick={() => setActiveHref(item.href)}
             >
               {item.label}
             </a>
@@ -90,10 +111,11 @@ function Header() {
         <nav aria-label="Mobile navigation">
           {navItems.map((item) => (
             <a
-              className={activeSection === item.href ? 'is-active' : undefined}
+              aria-current={activeHref === item.href ? 'location' : undefined}
+              className={activeHref === item.href ? 'is-active' : undefined}
               href={item.href}
               key={item.href}
-              onClick={handleNavClick}
+              onClick={() => handleNavClick(item.href)}
             >
               {item.label}
             </a>
@@ -105,4 +127,3 @@ function Header() {
 }
 
 export default Header;
-

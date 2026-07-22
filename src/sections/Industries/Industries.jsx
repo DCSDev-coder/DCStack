@@ -5,10 +5,10 @@ import './Industries.css';
 
 const industries = [
   { Icon: Building2, label: 'Smart Infrastructure', color: '#16a34a' },
-  { Icon: Briefcase, label: 'Business Operations', color: '#1e3a8a' },
-  { Icon: Globe, label: 'Web Platforms', color: '#f97316' },
-  { Icon: Smartphone, label: 'Mobile Services', color: '#16a34a' },
-  { Icon: Rocket, label: 'Future Industry Solutions', color: '#1e3a8a' },
+  { Icon: Briefcase, label: 'Business Administration', color: '#1e3a8a' },
+  { Icon: Globe, label: 'Retail & POS', color: '#f97316' },
+  { Icon: Smartphone, label: 'Ordering & Services', color: '#16a34a' },
+  { Icon: Rocket, label: 'Finance Operations', color: '#1e3a8a' },
 ];
 
 const IndustrySet = () => (
@@ -29,7 +29,7 @@ function Industries() {
         <SectionHeading
           eyebrow="Industries we support"
           id="industries-title"
-          title="Solutions for Every Industry"
+          title="Software for Everyday Business Needs"
         />
       </Container>
       <div className="industries__marquee">

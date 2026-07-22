@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/support", "destination": "/index.html" },
+    { "source": "/smart-rack", "destination": "/index.html" },
+    { "source": "/smart-rack/:path*", "destination": "/index.html" }
+  ]
+}

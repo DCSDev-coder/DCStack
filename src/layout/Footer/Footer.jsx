@@ -6,30 +6,29 @@ const footerGroups = [
   {
     title: 'Company',
     links: [
-      { label: 'About', href: '#about' },
-      { label: 'Solutions', href: '#build' },
-      { label: 'Industries', href: '#industries' },
-      { label: 'Contact', href: '#contact' },
+      { label: 'About', href: '/#about' },
+      { label: 'Projects', href: '/#projects' },
+      { label: 'Capabilities', href: '/#build' },
+      { label: 'Industries', href: '/#industries' },
+      { label: 'Contact', href: '/#contact' },
     ],
   },
   {
-    title: 'Solutions',
+    title: 'Projects',
     links: [
-      { label: 'Mobile Applications', href: '#build' },
-      { label: 'Website Systems', href: '#build' },
-      { label: 'Admin Dashboards', href: '#build' },
-      { label: 'Monitoring Platforms', href: '#build' },
-      { label: 'Custom Digital Solutions', href: '#build' },
+      { label: 'DCS Smart Rack Monitoring', href: '/smart-rack' },
+      { label: 'Project Support', href: '/support' },
+      { label: 'Smart Rack Support', href: '/smart-rack/support' },
+      { label: 'Smart Rack Privacy', href: '/smart-rack/privacy' },
     ],
   },
   {
     title: 'Industries',
     links: [
-      { label: 'Smart Infrastructure', href: '#industries' },
-      { label: 'Business Operations', href: '#industries' },
-      { label: 'Web Platforms', href: '#industries' },
-      { label: 'Mobile Services', href: '#industries' },
-      { label: 'Future Industry Solutions', href: '#industries' },
+      { label: 'Smart Infrastructure', href: '/#industries' },
+      { label: 'Business Administration', href: '/#industries' },
+      { label: 'Retail & POS', href: '/#industries' },
+      { label: 'Finance Operations', href: '/#industries' },
     ],
   },
 ];
@@ -40,9 +39,9 @@ function Footer() {
       <Container className="site-footer__inner">
         <div className="site-footer__brand">
           <div className="site-footer__logo-wrapper">
-            <BrandLogo />
+            <BrandLogo tone="light" />
           </div>
-          <p>Technology development that powers modern businesses and drives the future forward.</p>
+          <p>Practical software that helps modern businesses work better.</p>
         </div>
         {footerGroups.map((group) => (
           <div className="site-footer__group" key={group.title}>
@@ -60,12 +59,15 @@ function Footer() {
           <h2>Connect</h2>
           <ul>
             <li>
-              <a href="mailto:sales@dcstack.my">sales@dcstack.my</a>
+              <a href="mailto:dcstack26@gmail.com">dcstack26@gmail.com</a>
             </li>
             <li>
-              <a href="tel:+622112345678">+0378000511</a>
+              <a href="tel:+601111476110">+60 11-1147 6110</a>
             </li>
-            <li>Eco Forest, Semenyih, Selangor</li>
+            <li>Malaysia</li>
+            <li>
+              <a href="/support">Support Centre</a>
+            </li>
           </ul>
         </div>
       </Container>
