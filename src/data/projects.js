@@ -5,11 +5,11 @@ export const projects = [
     category: 'Smart infrastructure',
     status: 'Soft launch',
     summary:
-      'A mobile app that puts key smart rack information in one clear view.',
+      'A clear monitoring system for smart rack displays and supported mobile devices.',
     detailHref: '/smart-rack',
     supportHref: '/smart-rack/support',
     privacyHref: '/smart-rack/privacy',
-    highlights: ['One clear dashboard', 'Live system status', 'Secure user access', 'Mobile access'],
+    highlights: ['Clear rack display', 'Live system status', 'Secure user access', 'Mobile access'],
   },
 ];
 
