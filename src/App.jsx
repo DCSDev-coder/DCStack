@@ -17,13 +17,13 @@ function App() {
 
   useEffect(() => {
     const titles = {
-      '/smart-rack': 'DCS Smart Rack Monitoring | DCStack',
+      '/smart-rack': 'DCS Smart Rack Monitoring | IoT Infrastructure Solution | DCStack',
       '/smart-rack/privacy': 'Privacy Policy | DCS Smart Rack Monitoring',
-      '/smart-rack/support': 'Support | DCS Smart Rack Monitoring',
-      '/support': 'Support Centre | DCStack',
+      '/smart-rack/support': 'Smart Rack Support | Technical Support Centre | DCStack',
+      '/support': 'DCS Support Centre | Full-Stack IT & Smart Infrastructure Support',
     };
 
-    document.title = titles[path] ?? 'DCStack | Corporate Digital Solutions';
+    document.title = titles[path] ?? 'DCStack | Full-Stack Custom Software & Smart Infrastructure Solutions';
   }, [path]);
 
   let content;
