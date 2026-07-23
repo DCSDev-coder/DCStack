@@ -59,12 +59,12 @@ function Footer() {
           <h2>Connect</h2>
           <ul>
             <li>
-              <a href="mailto:dcstack26@gmail.com">dcstack26@gmail.com</a>
+              <a href="mailto:sales@dcstack.my">sales@dcstack.my</a>
             </li>
             <li>
-              <a href="tel:+601111476110">+60 11-1147 6110</a>
+              <a href="tel:+60378000511">(+60) 37800 0511</a>
             </li>
-            <li>Malaysia</li>
+            <li>No. 42-2 Jalan Eco Forest 6/1C<br />Eco Forest 43500<br />Semenyih Selangor Malaysia</li>
             <li>
               <a href="/support">Support Centre</a>
             </li>

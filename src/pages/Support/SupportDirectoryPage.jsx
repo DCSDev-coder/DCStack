@@ -53,8 +53,8 @@ function SupportDirectoryPage() {
               <p>Our team can send your request to the right person.</p>
             </div>
             <div>
-              <a href="mailto:dcstack26@gmail.com?subject=DCStack%20Support%20Request">dcstack26@gmail.com</a>
-              <a href="tel:+601111476110">+60 11-1147 6110</a>
+              <a href="mailto:support@dcstack.my?subject=DCStack%20Support%20Request">support@dcstack.my</a>
+              <a href="tel:+60378000511">(+60) 37800 0511</a>
             </div>
           </div>
         </Container>

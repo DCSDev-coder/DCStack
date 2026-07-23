@@ -210,13 +210,23 @@
   overflow: hidden;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   position: relative;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-capabilities__grid article:hover,
+.support-page__grid article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 45px rgb(11 31 58 / 12%), 0 0 24px rgb(140 198 63 / 18%);
 }
 
 .product-capabilities__grid article::before,
 .support-page__grid article::before {
   animation: random-beam 8s ease-in-out infinite;
-  background: conic-gradient(transparent 75%,
-      var(--color-green) 100%);
+  background: conic-gradient(
+    transparent 68%,
+    var(--color-green) 86%,
+    var(--color-orange) 100%
+  );
   content: '';
   height: 200%;
   left: -50%;
@@ -224,6 +234,34 @@
   top: -50%;
   width: 200%;
   z-index: 0;
+  transition: opacity 300ms ease;
+}
+
+/* Staggered & randomized sequence timings for developer tech feel */
+.product-capabilities__grid article:nth-child(1)::before,
+.support-page__grid article:nth-child(1)::before {
+  animation-duration: 7.2s;
+  animation-delay: 0s;
+}
+
+.product-capabilities__grid article:nth-child(2)::before,
+.support-page__grid article:nth-child(2)::before {
+  animation-duration: 9.6s;
+  animation-delay: -3.4s;
+  animation-direction: reverse;
+}
+
+.product-capabilities__grid article:nth-child(3)::before,
+.support-page__grid article:nth-child(3)::before {
+  animation-duration: 8.4s;
+  animation-delay: -5.8s;
+}
+
+.product-capabilities__grid article:nth-child(4)::before,
+.support-page__grid article:nth-child(4)::before {
+  animation-duration: 10.8s;
+  animation-delay: -2.1s;
+  animation-direction: reverse;
 }
 
 .product-capabilities__grid article::after,

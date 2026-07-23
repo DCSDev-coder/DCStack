@@ -13,7 +13,7 @@ const CTA = () => {
             <h3 id="cta-title">We are building more projects.</h3>
             <p>Have an idea? Let's build it together.</p>
           </div>
-          <a href="mailto:dcstack26@gmail.com" className="cta-button">
+          <a href="mailto:sales@dcstack.my" className="cta-button">
             Contact Us
             <span className="cta-arrow">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">

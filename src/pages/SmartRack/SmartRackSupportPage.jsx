@@ -22,7 +22,7 @@ function SmartRackSupportPage() {
           <p className="page-eyebrow">DCS Smart Rack Monitoring</p>
           <h1>Smart Rack support</h1>
           <p>Get help with sign-in, monitoring data, notifications, controls, and door access.</p>
-          <a className="page-button page-button--primary" href="mailto:dcstack26@gmail.com?subject=DCS%20Smart%20Rack%20Support">
+          <a className="page-button page-button--primary" href="mailto:support@dcstack.my?subject=DCS%20Smart%20Rack%20Support">
             Email support
           </a>
         </Container>
@@ -52,9 +52,9 @@ function SmartRackSupportPage() {
               <p>Support is available to approved users and client contacts.</p>
             </div>
             <address>
-              <a href="mailto:dcstack26@gmail.com">dcstack26@gmail.com</a>
-              <a href="tel:+601111476110">+60 11-1147 6110</a>
-              <span>Malaysia</span>
+              <a href="mailto:support@dcstack.my">support@dcstack.my</a>
+              <a href="tel:+60378000511">(+60) 37800 0511</a>
+              <span>No. 42-2 Jalan Eco Forest 6/1C Eco Forest 43500<br />Semenyih Selangor Malaysia</span>
             </address>
           </div>
 

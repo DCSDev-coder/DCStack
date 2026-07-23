@@ -6,10 +6,11 @@ function SmartRackPrivacyPage() {
     <div className="document-page">
       <Container className="document-page__layout">
         <aside className="document-page__summary">
+          <a className="support-page__back" href="/smart-rack/support" style={{ marginBottom: '2rem' }}>Back to support</a>
           <p className="page-eyebrow">DCS Smart Rack Monitoring</p>
           <h1>Privacy Policy</h1>
           <p>Effective 22 July 2026</p>
-          <a href="mailto:dcstack26@gmail.com">Privacy contact</a>
+          <a href="mailto:support@dcstack.my">Privacy contact</a>
         </aside>
 
         <article className="document-page__content">
@@ -96,9 +97,10 @@ function SmartRackPrivacyPage() {
             <h2>Contact us</h2>
             <p>
               Data Center Specialists (M) Sdn Bhd<br />
-              Malaysia<br />
-              <a href="mailto:dcstack26@gmail.com">dcstack26@gmail.com</a><br />
-              <a href="tel:+601111476110">+60 11-1147 6110</a>
+              No. 42-2 Jalan Eco Forest 6/1C Eco Forest 43500<br />
+              Semenyih Selangor Malaysia<br />
+              <a href="mailto:support@dcstack.my">support@dcstack.my</a><br />
+              <a href="tel:+60378000511">(+60) 37800 0511</a>
             </p>
           </section>
         </article>
