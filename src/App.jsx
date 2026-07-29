@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Header from './layout/Header/Header.jsx';
 import Footer from './layout/Footer/Footer.jsx';
 import SmartRackPage from './pages/SmartRack/SmartRackPage.jsx';
@@ -54,6 +55,7 @@ function App() {
       <Header />
       <main>{content}</main>
       <Footer />
+      <Analytics />
     </>
   );
 }
