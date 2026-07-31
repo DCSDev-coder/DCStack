@@ -2,6 +2,7 @@ import Container from '../../components/Container/Container.jsx';
 import { Eye, Monitor, Lock, Smartphone } from 'lucide-react';
 import dashboardPreview from '../../assets/images/Dashboard_Monitor/Dashboard.png';
 import systemHealthPreview from '../../assets/images/Dashboard_Monitor/System Health.png';
+import { navigateToSection } from '../../utils/sectionNavigation.js';
 import './SmartRackPages.css';
 
 const capabilities = [
@@ -17,18 +18,18 @@ function SmartRackPage() {
       <section className="product-hero">
         <Container className="product-hero__inner">
           <div>
-            <p className="page-eyebrow">DCS Smart Infrastructure</p>
+            <p className="page-eyebrow">DCStack Smart Infrastructure</p>
             <h1>Clear smart rack monitoring, on-site and on the go.</h1>
             <p className="product-hero__lead">
-              DCS Smart Rack Monitoring gives approved teams a clear view of rack activity through the mobile app
-              and the smart rack display. The updated interface is easier to read, navigate, and use during daily work.
+              Smart Rack Monitoring gives approved teams a clear view of rack activity through the mobile app and
+              the smart rack display. The updated interface is easier to read, navigate, and use during daily work.
             </p>
             <div className="product-hero__actions">
               <a className="page-button page-button--primary" href="/smart-rack/support">Get support</a>
-              <a className="page-button page-button--secondary" href="/#contact">Contact DCStack</a>
+              <a className="page-button page-button--secondary" href="/" onClick={(event) => navigateToSection(event, 'contact')}>Contact DCStack</a>
             </div>
           </div>
-          <div className="product-hero__panel" aria-label="Preview of the DCS Smart Rack Monitoring interface">
+          <div className="product-hero__panel" aria-label="Preview of the Smart Rack Monitoring interface">
             <div className="product-hero__panel-copy">
               <span>Interface preview</span>
               <strong>Clear information on every screen</strong>

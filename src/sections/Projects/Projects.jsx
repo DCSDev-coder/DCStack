@@ -13,15 +13,15 @@ function ProjectVisual() {
         <span>Interface preview</span>
         <strong>Simple monitoring, wherever you work.</strong>
       </div>
-      <div className="projects__screens" aria-label="Preview of the DCS Smart Rack Monitoring interface">
+      <div className="projects__screens" aria-label="Preview of the Smart Rack Monitoring interface">
         <figure className="projects__screen projects__screen--health">
-          <img src={systemHealthPreview} alt="System health overview in the DCS Smart Rack Monitoring app" />
+          <img src={systemHealthPreview} alt="System health overview in the Smart Rack Monitoring app" />
         </figure>
         <figure className="projects__screen projects__screen--dashboard">
-          <img src={dashboardPreview} alt="Main monitoring dashboard in the DCS Smart Rack Monitoring app" />
+          <img src={dashboardPreview} alt="Main monitoring dashboard in the Smart Rack Monitoring app" />
         </figure>
         <figure className="projects__screen projects__screen--ac">
-          <img src={acMonitoringPreview} alt="Air conditioning monitoring view in the DCS Smart Rack Monitoring app" />
+          <img src={acMonitoringPreview} alt="Air conditioning monitoring view in the Smart Rack Monitoring app" />
         </figure>
       </div>
       <p>This preview shows a sample interface. Features and information may differ for each setup.</p>
@@ -39,7 +39,7 @@ function Projects() {
           title="Products Built for Daily Work"
         />
         <p className="projects__intro">
-          See the products we design, build, and support for Data Center Specialists and approved clients.
+          See the products we design, build, and support for internal teams and approved clients.
         </p>
 
         <div className="projects__list">

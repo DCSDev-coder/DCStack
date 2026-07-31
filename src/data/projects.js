@@ -1,7 +1,7 @@
 export const projects = [
   {
     slug: 'smart-rack',
-    name: 'DCS Smart Rack Monitoring',
+    name: 'Smart Rack Monitoring',
     category: 'Smart infrastructure',
     status: 'Soft launch',
     summary:

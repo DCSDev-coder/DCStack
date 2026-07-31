@@ -1,5 +1,6 @@
 import Container from '../../components/Container/Container.jsx';
 import BrandLogo from '../../components/BrandLogo/BrandLogo.jsx';
+import { navigateToSection } from '../../utils/sectionNavigation.js';
 import './Footer.css';
 
 const footerGroups = [
@@ -16,7 +17,7 @@ const footerGroups = [
   {
     title: 'Projects',
     links: [
-      { label: 'DCS Smart Rack Monitoring', href: '/smart-rack' },
+      { label: 'Smart Rack Monitoring', href: '/smart-rack' },
       { label: 'Project Support', href: '/support' },
       { label: 'Smart Rack Support', href: '/smart-rack/support' },
       { label: 'Smart Rack Privacy', href: '/smart-rack/privacy' },
@@ -34,6 +35,20 @@ const footerGroups = [
 ];
 
 function Footer() {
+  const renderLink = (link) => {
+    const isSectionLink = link.href.startsWith('/#');
+    const sectionId = isSectionLink ? link.href.slice(2) : null;
+
+    return (
+      <a
+        href={isSectionLink ? '/' : link.href}
+        onClick={isSectionLink ? (event) => navigateToSection(event, sectionId) : undefined}
+      >
+        {link.label}
+      </a>
+    );
+  };
+
   return (
     <footer className="site-footer">
       <Container className="site-footer__inner">
@@ -49,7 +64,7 @@ function Footer() {
             <ul>
               {group.links.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href}>{link.label}</a>
+                  {renderLink(link)}
                 </li>
               ))}
             </ul>
@@ -73,7 +88,7 @@ function Footer() {
       </Container>
       <div className="site-footer__bottom">
         <Container>
-          <p>&copy; 2026 DCStack / Data Center Specialists. All rights reserved.</p>
+          <p>&copy; 2026 DCStack. All rights reserved.</p>
         </Container>
       </div>
     </footer>

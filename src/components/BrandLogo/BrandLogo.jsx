@@ -14,7 +14,7 @@ function BrandLogo({ tone = 'dark', withSubtitle = false }) {
       </span>
       <span className="brand-logo__text">
         <strong><DecodedText text="DCSTACK" /></strong>
-        {(withSubtitle || tone === 'light') ? <small>Data Center Specialists</small> : null}
+        {(withSubtitle || tone === 'light') ? <small>Software Division</small> : null}
       </span>
     </span>
   );

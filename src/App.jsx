@@ -11,19 +11,31 @@ import Hero from './sections/Hero/Hero.jsx';
 import Industries from './sections/Industries/Industries.jsx';
 import Projects from './sections/Projects/Projects.jsx';
 import WhatWeBuild from './sections/WhatWeBuild/WhatWeBuild.jsx';
+import { consumePendingSection, scrollToSection } from './utils/sectionNavigation.js';
 
 function App() {
   const path = window.location.pathname.replace(/\/$/, '') || '/';
 
   useEffect(() => {
     const titles = {
-      '/smart-rack': 'DCS Smart Rack Monitoring | IoT Infrastructure Solution | DCStack',
-      '/smart-rack/privacy': 'Privacy Policy | DCS Smart Rack Monitoring',
+      '/smart-rack': 'Smart Rack Monitoring | IoT Infrastructure Solution | DCStack',
+      '/smart-rack/privacy': 'Privacy Policy | Smart Rack Monitoring',
       '/smart-rack/support': 'Smart Rack Support | Technical Support Centre | DCStack',
-      '/support': 'DCS Support Centre | Full-Stack IT & Smart Infrastructure Support',
+      '/support': 'DCStack Support Centre | Full-Stack IT & Smart Infrastructure Support',
     };
 
     document.title = titles[path] ?? 'DCStack | Full-Stack Custom Software & Smart Infrastructure Solutions';
+  }, [path]);
+
+  useEffect(() => {
+    if (path !== '/') return;
+
+    const pendingSection = consumePendingSection();
+    if (!pendingSection) return;
+
+    window.requestAnimationFrame(() => {
+      scrollToSection(pendingSection);
+    });
   }, [path]);
 
   let content;

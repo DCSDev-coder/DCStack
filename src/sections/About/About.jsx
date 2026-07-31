@@ -8,7 +8,7 @@ function About() {
         <div className="about__left">
           <p className="about__subtitle">ABOUT DCSTACK</p>
           <h2 className="about__title" id="about-title">
-            The software team under Data Center Specialists.
+            Digital products and software built under the DCStack brand.
           </h2>
         </div>
         
@@ -16,8 +16,8 @@ function About() {
         
         <div className="about__right">
           <p className="about__copy">
-            DCStack is the software team under Data Center Specialists. We build business software, mobile apps,
-            monitoring platforms, and custom systems that help teams work faster and stay in control.
+            DCStack builds business software, mobile apps, monitoring platforms, and custom systems that help
+            teams work faster and stay in control.
           </p>
         </div>
       </Container>

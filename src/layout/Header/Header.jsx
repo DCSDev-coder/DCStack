@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 import BrandLogo from '../../components/BrandLogo/BrandLogo.jsx';
 import Container from '../../components/Container/Container.jsx';
+import { navigateToSection } from '../../utils/sectionNavigation.js';
 import './Header.css';
 
 const navItems = [
-  { label: 'Home', href: '/#top', sectionId: 'top' },
-  { label: 'About', href: '/#about', sectionId: 'about' },
-  { label: 'Projects', href: '/#projects', sectionId: 'projects' },
-  { label: 'Capabilities', href: '/#build', sectionId: 'build' },
-  { label: 'Contact', href: '/#contact', sectionId: 'contact' },
+  { label: 'Home', sectionId: 'top' },
+  { label: 'About', sectionId: 'about' },
+  { label: 'Projects', sectionId: 'projects' },
+  { label: 'Capabilities', sectionId: 'build' },
+  { label: 'Contact', sectionId: 'contact' },
 ];
 
 function Header() {
   const isLandingPage = window.location.pathname === '/';
-  const [activeHref, setActiveHref] = useState(isLandingPage ? '/#top' : '/#projects');
+  const [activeSection, setActiveSection] = useState(isLandingPage ? 'top' : 'projects');
   const [isScrolled, setIsScrolled] = useState(window.scrollY > 12);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -28,17 +29,17 @@ function Header() {
 
       const viewportMarker = Math.min(180, window.innerHeight * 0.28);
       const nearPageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
-      let currentHref = '/#top';
+      let currentSection = 'top';
 
       for (const item of navItems) {
         const section = document.getElementById(item.sectionId);
         if (section && section.getBoundingClientRect().top <= viewportMarker) {
-          currentHref = item.href;
+          currentSection = item.sectionId;
         }
       }
 
-      if (nearPageBottom) currentHref = '/#contact';
-      setActiveHref(currentHref);
+      if (nearPageBottom) currentSection = 'contact';
+      setActiveSection(currentSection);
     };
 
     const handleScroll = () => {
@@ -66,15 +67,16 @@ function Header() {
     return () => document.removeEventListener('click', handleClick);
   }, [menuOpen]);
 
-  const handleNavClick = (href) => {
-    setActiveHref(href);
+  const handleNavClick = (event, sectionId) => {
+    navigateToSection(event, sectionId);
+    setActiveSection(sectionId);
     setMenuOpen(false);
   };
 
   return (
     <header className={`site-header${isScrolled ? ' is-scrolled' : ''}`}>
       <Container className="site-header__inner">
-        <a aria-label="DCStack home" className="site-header__logo" href="/#top">
+        <a aria-label="DCStack home" className="site-header__logo" href="/" onClick={(event) => handleNavClick(event, 'top')}>
           <BrandLogo />
         </a>
 
@@ -82,11 +84,11 @@ function Header() {
         <nav aria-label="Primary navigation" className="site-header__nav">
           {navItems.map((item) => (
             <a
-              aria-current={activeHref === item.href ? 'location' : undefined}
-              className={activeHref === item.href ? 'is-active' : undefined}
-              href={item.href}
-              key={item.href}
-              onClick={() => setActiveHref(item.href)}
+              aria-current={activeSection === item.sectionId ? 'location' : undefined}
+              className={activeSection === item.sectionId ? 'is-active' : undefined}
+              href="/"
+              key={item.sectionId}
+              onClick={(event) => handleNavClick(event, item.sectionId)}
             >
               {item.label}
             </a>
@@ -111,11 +113,11 @@ function Header() {
         <nav aria-label="Mobile navigation">
           {navItems.map((item) => (
             <a
-              aria-current={activeHref === item.href ? 'location' : undefined}
-              className={activeHref === item.href ? 'is-active' : undefined}
-              href={item.href}
-              key={item.href}
-              onClick={() => handleNavClick(item.href)}
+              aria-current={activeSection === item.sectionId ? 'location' : undefined}
+              className={activeSection === item.sectionId ? 'is-active' : undefined}
+              href="/"
+              key={item.sectionId}
+              onClick={(event) => handleNavClick(event, item.sectionId)}
             >
               {item.label}
             </a>
