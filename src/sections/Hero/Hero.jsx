@@ -8,16 +8,17 @@ function Hero() {
     <section className="hero" id="top" aria-labelledby="hero-title">
       <Container className="hero__inner">
         <div className="hero__content">
-          <p className="eyebrow">Technology. Innovation. Impact.</p>
-          <h1 id="hero-title">Building Digital Solutions Across Industries</h1>
+          <p className="eyebrow">Smart Infrastructure & Software</p>
+          <h1 id="hero-title">Intelligent IoT & Custom Software Built for Control</h1>
           <p className="hero__lead">
-            DCStack develops mobile applications, website systems, dashboards, monitoring platforms, and
-            custom digital solutions that help organizations operate smarter, faster, and more efficiently.
+            From real-time Smart Rack IoT monitoring and environmental controls to modern store POS,
+            customer mobile apps, and automated platforms — DCStack engineers reliable,
+            high-impact digital systems for modern operations.
           </p>
           <div className="hero__actions" aria-label="Hero actions">
-            <Button href="#build">Learn More</Button>
+            <Button href="#projects">Explore Solutions</Button>
             <Button href="#contact" variant="secondary">
-              Contact Us
+              Request a Demo
             </Button>
           </div>
         </div>

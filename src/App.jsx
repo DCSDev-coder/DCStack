@@ -5,6 +5,9 @@ import SmartRackPage from './pages/SmartRack/SmartRackPage.jsx';
 import SmartRackPrivacyPage from './pages/SmartRack/SmartRackPrivacyPage.jsx';
 import SmartRackSupportPage from './pages/SmartRack/SmartRackSupportPage.jsx';
 import SupportDirectoryPage from './pages/Support/SupportDirectoryPage.jsx';
+import C2PosPage from './pages/C2Pos/C2PosPage.jsx';
+import C2OrderingPage from './pages/C2Ordering/C2OrderingPage.jsx';
+import FintechPage from './pages/Fintech/FintechPage.jsx';
 import About from './sections/About/About.jsx';
 import CTA from './sections/CTA/CTA.jsx';
 import Hero from './sections/Hero/Hero.jsx';
@@ -17,10 +20,17 @@ function App() {
   const path = window.location.pathname.replace(/\/$/, '') || '/';
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [path]);
+
+  useEffect(() => {
     const titles = {
       '/smart-rack': 'Smart Rack Monitoring | IoT Infrastructure Solution | DCStack',
       '/smart-rack/privacy': 'Privacy Policy | Smart Rack Monitoring',
       '/smart-rack/support': 'Smart Rack Support | Technical Support Centre | DCStack',
+      '/c2-pos': 'C2 Cafe Smart POS System | Retail & F&B Technology | DCStack',
+      '/c2-ordering': 'C2 Cafe Mobile Ordering & Loyalty | Customer Mobile App | DCStack',
+      '/fintech-payments': 'Fintech & Payment Gateway Integration | Billing Orchestration | DCStack',
       '/support': 'DCStack Support Centre | Full-Stack IT & Smart Infrastructure Support',
     };
 
@@ -48,6 +58,12 @@ function App() {
     content = <SmartRackSupportPage />;
   } else if (path === '/smart-rack') {
     content = <SmartRackPage />;
+  } else if (path === '/c2-pos') {
+    content = <C2PosPage />;
+  } else if (path === '/c2-ordering') {
+    content = <C2OrderingPage />;
+  } else if (path === '/fintech-payments') {
+    content = <FintechPage />;
   } else {
     content = (
       <>

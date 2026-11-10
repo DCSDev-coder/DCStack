@@ -6,18 +6,17 @@ function About() {
     <section className="section about" id="about" aria-labelledby="about-title">
       <Container className="about__inner">
         <div className="about__left">
-          <p className="about__subtitle">ABOUT DCSTACK</p>
+          <p className="eyebrow">About DCStack</p>
           <h2 className="about__title" id="about-title">
-            Digital products and software built under the DCStack brand.
+            Smart infrastructure and software built under the DCStack brand.
           </h2>
         </div>
-        
+
         <div className="about__divider" aria-hidden="true" />
-        
+
         <div className="about__right">
           <p className="about__copy">
-            DCStack builds business software, mobile apps, monitoring platforms, and custom systems that help
-            teams work faster and stay in control.
+            DCStack designs and builds intelligent IoT monitoring platforms, mobile applications, point-of-sale systems, and custom software that help teams work faster, operate smoothly, and stay in complete control.
           </p>
         </div>
       </Container>

@@ -77,7 +77,7 @@ function Footer() {
               <a href="mailto:sales@dcstack.my">sales@dcstack.my</a>
             </li>
             <li>
-              <a href="tel:+60378000511">(+60) 37800 0511</a>
+              <a href="tel:+60126946907">+60 12-694 6907</a>
             </li>
             <li>No. 42-2 Jalan Eco Forest 6/1C<br />Eco Forest 43500<br />Semenyih Selangor Malaysia</li>
             <li>

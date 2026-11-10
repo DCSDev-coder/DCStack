@@ -98,7 +98,7 @@ function SmartRackPrivacyPage() {
               No. 42-2 Jalan Eco Forest 6/1C Eco Forest 43500<br />
               Semenyih Selangor Malaysia<br />
               <a href="mailto:support@dcstack.my">support@dcstack.my</a><br />
-              <a href="tel:+60378000511">(+60) 37800 0511</a>
+              <a href="tel:+60126946907">+60 12-694 6907</a>
             </p>
           </section>
         </article>

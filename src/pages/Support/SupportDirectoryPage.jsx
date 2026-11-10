@@ -39,8 +39,14 @@ function SupportDirectoryPage() {
                 <h3>{project.name}</h3>
                 <p>{project.summary}</p>
                 <div className="support-directory__links">
-                  <a href={project.supportHref}>Open support</a>
-                  <a href={project.privacyHref}>Privacy</a>
+                  <a href={project.supportHref || '/support'}>Open support</a>
+                  {project.privacyHref && project.privacyHref !== '/support' ? (
+                    <a href={project.privacyHref}>Privacy</a>
+                  ) : (
+                    <a href={`mailto:support@dcstack.my?subject=${encodeURIComponent(project.name + ' Support Request')}`}>
+                      Contact Team
+                    </a>
+                  )}
                 </div>
               </article>
             ))}
@@ -54,7 +60,7 @@ function SupportDirectoryPage() {
             </div>
             <div>
               <a href="mailto:support@dcstack.my?subject=DCStack%20Support%20Request">support@dcstack.my</a>
-              <a href="tel:+60378000511">(+60) 37800 0511</a>
+              <a href="tel:+60126946907">+60 12-694 6907</a>
             </div>
           </div>
         </Container>
