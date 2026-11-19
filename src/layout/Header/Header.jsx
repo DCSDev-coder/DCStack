@@ -9,12 +9,19 @@ const navItems = [
   { label: 'About', sectionId: 'about' },
   { label: 'Projects', sectionId: 'projects' },
   { label: 'Capabilities', sectionId: 'build' },
-  { label: 'Contact', sectionId: 'contact' },
+  { label: 'Contact', sectionId: 'contact', href: '/contact' },
 ];
 
 function Header() {
-  const isLandingPage = window.location.pathname === '/';
-  const [activeSection, setActiveSection] = useState(isLandingPage ? 'top' : 'projects');
+  const pathname = window.location.pathname.replace(/\/$/, '') || '/';
+  const isLandingPage = pathname === '/';
+  const [activeSection, setActiveSection] = useState(
+    isLandingPage
+      ? 'top'
+      : pathname === '/contact'
+        ? 'contact'
+        : 'projects'
+  );
   const [isScrolled, setIsScrolled] = useState(window.scrollY > 12);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -38,7 +45,7 @@ function Header() {
         }
       }
 
-      if (nearPageBottom) currentSection = 'contact';
+      if (nearPageBottom) currentSection = 'industries';
       setActiveSection(currentSection);
     };
 
@@ -67,16 +74,20 @@ function Header() {
     return () => document.removeEventListener('click', handleClick);
   }, [menuOpen]);
 
-  const handleNavClick = (event, sectionId) => {
-    navigateToSection(event, sectionId);
-    setActiveSection(sectionId);
+  const handleNavClick = (event, item) => {
+    if (item.href) {
+      setMenuOpen(false);
+      return;
+    }
+    navigateToSection(event, item.sectionId);
+    setActiveSection(item.sectionId);
     setMenuOpen(false);
   };
 
   return (
     <header className={`site-header${isScrolled ? ' is-scrolled' : ''}`}>
       <Container className="site-header__inner">
-        <a aria-label="DCStack home" className="site-header__logo" href="/" onClick={(event) => handleNavClick(event, 'top')}>
+        <a aria-label="DCStack home" className="site-header__logo" href="/" onClick={(event) => handleNavClick(event, { sectionId: 'top' })}>
           <BrandLogo />
         </a>
 
@@ -86,9 +97,9 @@ function Header() {
             <a
               aria-current={activeSection === item.sectionId ? 'location' : undefined}
               className={activeSection === item.sectionId ? 'is-active' : undefined}
-              href="/"
+              href={item.href || '/'}
               key={item.sectionId}
-              onClick={(event) => handleNavClick(event, item.sectionId)}
+              onClick={(event) => handleNavClick(event, item)}
             >
               {item.label}
             </a>
@@ -115,9 +126,9 @@ function Header() {
             <a
               aria-current={activeSection === item.sectionId ? 'location' : undefined}
               className={activeSection === item.sectionId ? 'is-active' : undefined}
-              href="/"
+              href={item.href || '/'}
               key={item.sectionId}
-              onClick={(event) => handleNavClick(event, item.sectionId)}
+              onClick={(event) => handleNavClick(event, item)}
             >
               {item.label}
             </a>

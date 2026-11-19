@@ -1,108 +1,255 @@
+import { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, ArrowRight, Award, Bell, Clock, CreditCard, Gift, SlidersHorizontal } from 'lucide-react';
 import Container from '../../components/Container/Container.jsx';
-import { Smartphone, Sparkles, Award, CreditCard } from 'lucide-react';
-import mobileHomeImg from '../../assets/images/c2/mobile-home.png';
-import mobileMenuImg from '../../assets/images/c2/mobile-menu.png';
-import mobileRewardsImg from '../../assets/images/c2/mobile-rewards.png';
+import mobileHomeImg from '../../assets/images/c2/home.jpeg';
+import mobileMenuImg from '../../assets/images/c2/menu.jpeg';
+import mobileRewardsImg from '../../assets/images/c2/rewards.jpeg';
 import { navigateToSection } from '../../utils/sectionNavigation.js';
 import '../SmartRack/SmartRackPages.css';
 import '../../sections/Projects/Projects.css';
+import './C2OrderingPage.css';
 
-const capabilities = [
-  [
-    'Advance Mobile Pre-Orders',
-    'Patrons can order and pay ahead before arriving at the cafe, cutting queue wait times during morning rush hours.',
-    Smartphone,
-  ],
-  [
-    'Live Drink Customization',
-    'Full customization of coffee beans, sweetness percentages, milk alternatives (oat, dairy), and extra espresso shots.',
-    Sparkles,
-  ],
-  [
-    'Tiered Loyalty & Rewards',
-    'Automated point collection, digital stamp cards, and membership tier upgrades for repeat customer retention.',
-    Award,
-  ],
-  [
-    'Instant Cashless Checkout',
-    'Frictionless checkout powered by Malaysian online banking (FPX), DuitNow QR, and integrated e-wallet gateways.',
-    CreditCard,
-  ],
+const SCREENS = [
+  { id: 'home', src: mobileHomeImg, alt: 'C2 Coffee App Home Screen' },
+  { id: 'menu', src: mobileMenuImg, alt: 'C2 Coffee App Menu & Customization' },
+  { id: 'rewards', src: mobileRewardsImg, alt: 'C2 Coffee App Loyalty & Rewards' },
 ];
 
+const LEFT_EXPERIENCE = [
+  {
+    Icon: Clock,
+    title: 'Skip the Counter Queue',
+    subtitle: 'Order ahead and pick up fresh on arrival.',
+    accent: 'green',
+    screenIndex: 0,
+    enterDelay: '80ms',
+    floatDelay: '0s',
+  },
+  {
+    Icon: SlidersHorizontal,
+    title: 'Drink Customization',
+    subtitle: 'Choose beans, milk, ice & sweetness levels.',
+    accent: 'orange',
+    screenIndex: 1,
+    enterDelay: '180ms',
+    floatDelay: '0.8s',
+  },
+  {
+    Icon: CreditCard,
+    title: 'Instant Cashless Pay',
+    subtitle: 'One-tap checkout with saved preferences.',
+    accent: 'green',
+    screenIndex: 1,
+    enterDelay: '280ms',
+    floatDelay: '1.6s',
+  },
+];
+
+const RIGHT_EXPERIENCE = [
+  {
+    Icon: Award,
+    title: 'Loyalty & Stamp Tiers',
+    subtitle: 'Collect stamps & unlock member perks.',
+    accent: 'orange',
+    screenIndex: 2,
+    enterDelay: '130ms',
+    floatDelay: '0.4s',
+  },
+  {
+    Icon: Gift,
+    title: 'Digital Gift Cards',
+    subtitle: 'Send coffee vouchers to friends in-app.',
+    accent: 'green',
+    screenIndex: 2,
+    enterDelay: '230ms',
+    floatDelay: '1.2s',
+  },
+  {
+    Icon: Bell,
+    title: 'Live Order Updates',
+    subtitle: 'Real-time prep & pickup notifications.',
+    accent: 'orange',
+    screenIndex: 0,
+    enterDelay: '330ms',
+    floatDelay: '2s',
+  },
+];
+
+const CRUMB_LABEL = 'Online Ordering & Loyalty';
+
 function C2OrderingPage() {
+  const orbitRef = useRef(null);
+  const [isOrbitVisible, setIsOrbitVisible] = useState(false);
+  const [activeScreen, setActiveScreen] = useState(0);
+  const [typedLength, setTypedLength] = useState(0);
+  const [isTypingDone, setIsTypingDone] = useState(false);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+      setTypedLength(CRUMB_LABEL.length);
+      setIsTypingDone(true);
+      return undefined;
+    }
+
+    setTypedLength(0);
+    setIsTypingDone(false);
+
+    const intervalId = window.setInterval(() => {
+      setTypedLength((prev) => {
+        if (prev + 1 >= CRUMB_LABEL.length) {
+          window.clearInterval(intervalId);
+          setIsTypingDone(true);
+          return CRUMB_LABEL.length;
+        }
+        return prev + 1;
+      });
+    }, 26);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    const node = orbitRef.current;
+    if (!node) return undefined;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsOrbitVisible(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsOrbitVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.18 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    const timer = window.setInterval(() => {
+      setActiveScreen((prev) => (prev + 1) % SCREENS.length);
+    }, 3200);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const renderCard = (item) => {
+    const { Icon, title, subtitle, accent, screenIndex, enterDelay, floatDelay } = item;
+    return (
+      <button
+        key={title}
+        type="button"
+        className={`c2-orbit__card c2-orbit__card--${accent}${activeScreen === screenIndex ? ' is-active' : ''}`}
+        style={{ '--enter-delay': enterDelay, '--float-delay': floatDelay }}
+        onClick={() => setActiveScreen(screenIndex)}
+      >
+        <span className="c2-orbit__icon" aria-hidden="true">
+          <Icon size={17} strokeWidth={2.2} />
+        </span>
+        <span className="c2-orbit__card-copy">
+          <strong>{title}</strong>
+          <span>{subtitle}</span>
+        </span>
+      </button>
+    );
+  };
+
   return (
     <div className="product-page">
-      <section className="product-hero">
-        <Container className="product-hero__inner">
-          <div>
-            <p className="page-eyebrow">DCStack Mobile Applications & Loyalty</p>
-            <h1>C2 Cafe Mobile Ordering & Loyalty Platform</h1>
-            <p className="product-hero__lead">
-              A bespoke customer-facing mobile application designed for C2 Coffee & Candle.
-              Empowers patrons to skip counter queues, customize their drinks, collect membership stamps,
-              and checkout instantly.
+      <section className="c2-page-header">
+        <Container>
+          <nav className="c2-page-header__crumb" aria-label="Breadcrumb">
+            <a href="/projects" className="c2-page-header__back">
+              <ArrowLeft size={15} aria-hidden="true" />
+              <span>Back to Projects</span>
+            </a>
+            <span className="c2-page-header__sep" aria-hidden="true">/</span>
+            <span className="c2-page-header__current" aria-label={CRUMB_LABEL}>
+              {CRUMB_LABEL.slice(0, typedLength)}
+              <span className={`c2-page-header__cursor${isTypingDone ? ' is-done' : ''}`} aria-hidden="true" />
+            </span>
+          </nav>
+
+          <div className="c2-page-header__inner">
+            <p className="c2-page-header__eyebrow">
+              DCSTACK Mobile Applications &amp; Loyalty &middot; Client Showcase
             </p>
-            <div className="product-hero__actions">
+            <h1>C2 Coffee App: Mobile Ordering &amp; Loyalty</h1>
+            <p className="c2-page-header__lead">
+              A bespoke customer-facing mobile application for <strong>C2 Coffee &amp; Candle</strong>, built for
+              queue-free pre-orders, visual drink customization, and instant Bean Stamp rewards.
+            </p>
+
+            <div className="c2-page-header__actions">
               <a
-                className="page-button page-button--primary"
+                className="c2-page-header__btn c2-page-header__btn--primary"
                 href="/"
                 onClick={(event) => navigateToSection(event, 'contact')}
               >
-                Inquire About Custom Apps
+                <span>Inquire About Custom Apps</span>
+                <ArrowRight size={16} aria-hidden="true" />
               </a>
-              <a className="page-button page-button--secondary" href="/support">
-                Visit Support Centre
+              <a className="c2-page-header__btn c2-page-header__btn--ghost" href="/projects">
+                <span>View All Projects</span>
               </a>
             </div>
-          </div>
-
-          <div className="product-hero__panel" aria-label="Preview of C2 Cafe Mobile Ordering App">
-            <div className="product-hero__panel-copy">
-              <span>Customer Mobile App</span>
-              <strong>C2 Coffee Ordering & Loyalty</strong>
-            </div>
-
-            <div className="projects__screens" style={{ margin: '1rem 0', minHeight: '270px' }} aria-hidden="true">
-              <figure className="projects__screen projects__screen--health">
-                <img src={mobileMenuImg} alt="C2 Menu" draggable={false} />
-              </figure>
-              <figure className="projects__screen projects__screen--dashboard">
-                <img src={mobileHomeImg} alt="C2 Home" draggable={false} />
-              </figure>
-              <figure className="projects__screen projects__screen--ac">
-                <img src={mobileRewardsImg} alt="C2 Rewards" draggable={false} />
-              </figure>
-            </div>
-
-            <p>Advance mobile pre-orders, drink modifiers, instant payment, and digital loyalty rewards.</p>
           </div>
         </Container>
       </section>
 
-      <section className="product-capabilities">
+      <section
+        ref={orbitRef}
+        className={`c2-orbit${isOrbitVisible ? ' is-visible' : ''}`}
+        aria-labelledby="c2-experience-title"
+      >
         <Container>
-          <div className="page-heading">
-            <p className="page-eyebrow">Customer Experience</p>
-            <h2>Built to elevate brand affinity and maximize repeat visits</h2>
+          <div className="c2-orbit__header">
+            <p className="c2-orbit__eyebrow">Customer Experience</p>
+            <h2 id="c2-experience-title">Built to elevate brand affinity and maximize repeat visits</h2>
+            <p>
+              Every touchpoint inside the C2 Coffee app is crafted around speed, personalization, and rewarding
+              loyalty.
+            </p>
           </div>
-          <div className="product-capabilities__grid">
-            {capabilities.map(([title, description, Icon], index) => (
-              <article key={title}>
-                <div className="product-capabilities__bg-icon">
-                  <Icon size={160} strokeWidth={1} />
+
+          <div className="c2-orbit__stage">
+            <div className="c2-orbit__ring" aria-hidden="true" />
+
+            <div className="c2-orbit__col c2-orbit__col--left">
+              {LEFT_EXPERIENCE.map(renderCard)}
+            </div>
+
+            <div className="c2-orbit__phone-wrap">
+              <div className="c2-orbit__phone-glow" aria-hidden="true" />
+              <div className="c2-orbit__phone">
+                <div className="c2-orbit__screen">
+                  <div className="c2-orbit__notch" aria-hidden="true" />
+                  {SCREENS.map((screen, index) => (
+                    <img
+                      key={screen.id}
+                      src={screen.src}
+                      alt={screen.alt}
+                      className={activeScreen === index ? 'is-active' : undefined}
+                      draggable={false}
+                    />
+                  ))}
                 </div>
-                <div className="product-capabilities__content">
-                  <span>0{index + 1}</span>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                </div>
-              </article>
-            ))}
+              </div>
+            </div>
+
+            <div className="c2-orbit__col c2-orbit__col--right">
+              {RIGHT_EXPERIENCE.map(renderCard)}
+            </div>
           </div>
-          <p className="product-availability">
-            Built natively for iOS and Android, directly synchronized with C2 Cafe counter terminals.
-          </p>
         </Container>
       </section>
 

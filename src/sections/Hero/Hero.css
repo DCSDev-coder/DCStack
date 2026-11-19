@@ -125,12 +125,25 @@
   z-index: 0;
 }
 
-.hero-stack:hover .hero-stack__layer--top {
-  transform: translate(-50%, -14px);
+@media (hover: hover) and (pointer: fine) {
+  .hero-stack:hover .hero-stack__layer--top {
+    transform: translate(-50%, -14px);
+  }
+
+  .hero-stack:hover .hero-stack__layer--bottom {
+    transform: translate(-50%, 14px);
+  }
 }
 
-.hero-stack:hover .hero-stack__layer--bottom {
-  transform: translate(-50%, 14px);
+@media (prefers-reduced-motion: reduce) {
+  .hero-stack,
+  .hero-stack__glow {
+    animation: none;
+  }
+
+  .hero-stack__layer {
+    transition: none;
+  }
 }
 
 @keyframes stack-float {

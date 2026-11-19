@@ -12,12 +12,12 @@ function Hero() {
           <h1 id="hero-title">Intelligent IoT & Custom Software Built for Control</h1>
           <p className="hero__lead">
             From real-time Smart Rack IoT monitoring and environmental controls to modern store POS,
-            customer mobile apps, and automated platforms — DCStack engineers reliable,
+            customer mobile apps, and automated platforms. DCStack engineers reliable,
             high-impact digital systems for modern operations.
           </p>
           <div className="hero__actions" aria-label="Hero actions">
             <Button href="#projects">Explore Solutions</Button>
-            <Button href="#contact" variant="secondary">
+            <Button href="/contact" variant="secondary">
               Request a Demo
             </Button>
           </div>

@@ -1,108 +1,105 @@
+import { useEffect, useState } from 'react';
 import Container from '../../components/Container/Container.jsx';
-import { Store, Layers, Printer, TrendingUp, Clock, Activity } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Store, Layers, SlidersHorizontal, TrendingUp } from 'lucide-react';
 import { navigateToSection } from '../../utils/sectionNavigation.js';
 import '../SmartRack/SmartRackPages.css';
 import '../../sections/Projects/Projects.css';
+import '../C2Ordering/C2OrderingPage.css';
+
+const CRUMB_LABEL = 'Smart POS System';
 
 const capabilities = [
   [
-    'Rapid Touch Ordering',
-    'High-speed touch counter interface designed for rush-hour flow with custom drink modifiers, add-ons, and table selections.',
+    'Barista Workflow Coordination',
+    'High-speed touch counter interface designed to keep barista order queues organized and moving smoothly.',
     Store,
   ],
   [
-    'Real-Time Stock Deduction',
-    'Every beverage and pastry sold automatically deducts ingredients and alerts managers before stock depletes.',
+    'Real-Time Stock Tracking',
+    'Every beverage and item sold automatically updates ingredient and inventory counts before stock runs low.',
     Layers,
   ],
   [
-    'Multi-Station Printing',
-    'Dispatches cup stickers to the espresso bar and paper food chits to the kitchen over ESC/POS thermal printers.',
-    Printer,
+    'Menu & Price Adjustments',
+    'Easily update menu items, drink options, and pricing in real time from the management console.',
+    SlidersHorizontal,
   ],
   [
-    'Shift Audits & Sales Reports',
-    'Automatic end-of-day register reconciliation, cashier cash balancing, and real-time sales reporting by shift.',
+    'Sales Monitoring & Reports',
+    'Generate daily sales reports, monitor order volume, and review shift performance at a glance.',
     TrendingUp,
   ],
 ];
 
 function C2PosPage() {
+  const [typedLength, setTypedLength] = useState(0);
+  const [isTypingDone, setIsTypingDone] = useState(false);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) {
+      setTypedLength(CRUMB_LABEL.length);
+      setIsTypingDone(true);
+      return undefined;
+    }
+
+    setTypedLength(0);
+    setIsTypingDone(false);
+
+    const intervalId = window.setInterval(() => {
+      setTypedLength((prev) => {
+        if (prev + 1 >= CRUMB_LABEL.length) {
+          window.clearInterval(intervalId);
+          setIsTypingDone(true);
+          return CRUMB_LABEL.length;
+        }
+        return prev + 1;
+      });
+    }, 26);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="product-page">
-      <section className="product-hero">
-        <Container className="product-hero__inner">
-          <div>
-            <p className="page-eyebrow">DCStack Retail & F&B Technology</p>
-            <h1>C2 Cafe Smart POS & Live Inventory System</h1>
-            <p className="product-hero__lead">
-              High-speed counter point-of-sale engineered for modern cafe and food service operations.
-              Coordinates barista queue workflows, live ingredient and stock tracking, split billing,
-              and daily sales reporting.
+      <section className="c2-page-header">
+        <Container>
+          <nav className="c2-page-header__crumb" aria-label="Breadcrumb">
+            <a href="/projects" className="c2-page-header__back">
+              <ArrowLeft size={15} aria-hidden="true" />
+              <span>Back to Projects</span>
+            </a>
+            <span className="c2-page-header__sep" aria-hidden="true">/</span>
+            <span className="c2-page-header__current" aria-label={CRUMB_LABEL}>
+              {CRUMB_LABEL.slice(0, typedLength)}
+              <span className={`c2-page-header__cursor${isTypingDone ? ' is-done' : ''}`} aria-hidden="true" />
+            </span>
+          </nav>
+
+          <div className="c2-page-header__inner">
+            <p className="c2-page-header__eyebrow">
+              DCSTACK Retail &amp; F&amp;B Technology &middot; Production
             </p>
-            <div className="product-hero__actions">
+            <h1>Smart POS &amp; Live Inventory System</h1>
+            <p className="c2-page-header__lead">
+              High-speed counter point-of-sale engineered for{' '}
+              <strong>modern cafe and food service operations</strong>. Coordinates barista queue workflows,
+              live ingredient and stock tracking, split billing, and daily sales reporting.
+            </p>
+
+            <div className="c2-page-header__actions">
               <a
-                className="page-button page-button--primary"
+                className="c2-page-header__btn c2-page-header__btn--primary"
                 href="/"
                 onClick={(event) => navigateToSection(event, 'contact')}
               >
-                Inquire About POS Setup
+                <span>Inquire About POS Setup</span>
+                <ArrowRight size={16} aria-hidden="true" />
               </a>
-              <a className="page-button page-button--secondary" href="/support">
-                Visit Support Centre
+              <a className="c2-page-header__btn c2-page-header__btn--ghost" href="/projects">
+                <span>View All Projects</span>
               </a>
             </div>
-          </div>
-
-          <div className="product-hero__panel" aria-label="Preview of C2 Cafe Smart POS System">
-            <div className="product-hero__panel-copy">
-              <span>F&B & Retail POS</span>
-              <strong>Cafe POS & Live Inventory</strong>
-            </div>
-
-            <div className="pos-kds-mockup" style={{ margin: '0.5rem 0' }}>
-              <div className="pos-kds-top">
-                <div className="pos-kds-stream">
-                  <span className="pos-pulse-dot" />
-                  <strong>Live Order Stream: Connected</strong>
-                </div>
-                <span className="pos-counter-tag">Counter #02 Active</span>
-              </div>
-
-              <div className="pos-order-card">
-                <div className="pos-order-header">
-                  <span>Order #1084 • Dine-In (Table 04)</span>
-                  <span className="pos-kitchen-badge">Stock Auto-Deducted</span>
-                </div>
-                <div className="pos-order-items">
-                  <div className="pos-order-item">
-                    <span>2x Artisanal Cold Brew</span>
-                    <strong>RM 24.00</strong>
-                  </div>
-                  <div className="pos-order-item">
-                    <span>1x Truffle Melt Sandwich</span>
-                    <strong>RM 18.50</strong>
-                  </div>
-                </div>
-                <div className="pos-order-total">
-                  <span>Paid via Billplz QR</span>
-                  <strong>RM 42.50</strong>
-                </div>
-              </div>
-
-              <div className="pos-kds-metrics">
-                <div className="pos-metric-box">
-                  <Clock size={13} />
-                  <span>Today's Vol: <strong>214 Orders</strong></span>
-                </div>
-                <div className="pos-metric-box">
-                  <Activity size={13} />
-                  <span>Inventory: <strong>Live Synced</strong></span>
-                </div>
-              </div>
-            </div>
-
-            <p>Real-time synchronization between counter sales, live order queues, and ingredient stock tracking.</p>
           </div>
         </Container>
       </section>
@@ -127,9 +124,6 @@ function C2PosPage() {
               </article>
             ))}
           </div>
-          <p className="product-availability">
-            Currently deployed in production across active C2 Coffee & Candle retail locations in Malaysia.
-          </p>
         </Container>
       </section>
 
@@ -152,12 +146,12 @@ function C2PosPage() {
               <strong>Ready to Deploy</strong>
             </article>
             <article>
-              <span aria-hidden="true">PRINT</span>
+              <span aria-hidden="true">SYNC</span>
               <div>
-                <h3>Thermal Ticket Printers</h3>
-                <p>Standard ESC/POS thermal receipt printers and 80mm adhesive cup-sticker dispensers.</p>
+                <h3>Cloud Sales &amp; Menu Sync</h3>
+                <p>Instant menu, price, and daily sales synchronization across counter tablets and manager reports.</p>
               </div>
-              <strong>Bluetooth & LAN</strong>
+              <strong>Real-Time Cloud</strong>
             </article>
           </div>
         </Container>

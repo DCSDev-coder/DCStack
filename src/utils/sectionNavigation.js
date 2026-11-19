@@ -13,15 +13,34 @@ export function scrollToSection(sectionId, behavior = 'smooth') {
     return;
   }
 
+  const headerInner = document.querySelector('.site-header__inner');
+  const headerHeight = headerInner ? headerInner.getBoundingClientRect().height + 1 : 97;
+
+  if (targetId === 'about') {
+    const hero = document.querySelector('.hero-about-stage .hero');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (hero && window.innerWidth > 860 && !prefersReducedMotion) {
+      const top = Math.max(0, hero.offsetTop + hero.offsetHeight - headerHeight);
+      window.scrollTo({ top, behavior });
+      return;
+    }
+  }
+
   const target = document.getElementById(targetId);
   if (target) {
-    target.scrollIntoView({ behavior, block: 'start' });
+    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerHeight);
+    window.scrollTo({ top, behavior });
   }
 }
 
 export function navigateToSection(event, sectionId) {
   const targetId = normalizeSectionId(sectionId);
   event?.preventDefault();
+
+  if (targetId === 'contact') {
+    window.location.assign('/contact');
+    return;
+  }
 
   if (window.location.pathname === '/') {
     window.history.replaceState(null, '', '/');

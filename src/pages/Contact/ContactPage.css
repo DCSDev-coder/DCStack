@@ -1,0 +1,9 @@
+.contact-page .cta {
+  min-height: calc(100svh - 97px);
+}
+
+@media (max-width: 900px) {
+  .contact-page .cta {
+    min-height: auto;
+  }
+}

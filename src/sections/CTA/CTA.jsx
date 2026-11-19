@@ -1,26 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Mail,
   Phone,
   MapPin,
   MessageSquare,
   CheckCircle2,
-  Send,
-  ArrowRight
+  Send
 } from 'lucide-react';
 import Container from '../../components/Container/Container.jsx';
 import './CTA.css';
 
 const SERVICES = [
   'Smart Rack & IoT Monitoring',
-  'C2 Cafe POS & Counter Systems',
+  'Smart POS & Counter Systems',
   'Mobile Ordering & Loyalty Apps',
   'Payment & Billing Automation',
   'Custom Software Development',
   'General Inquiry',
 ];
 
-const CTA = () => {
+const OFFICE_ADDRESS =
+  'Data Center Specialists (M) Sdn. Bhd., No. 42-2, Jalan Eco Forest 6/1C, Eco Forest, 43500 Semenyih, Selangor';
+
+const OFFICE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(OFFICE_ADDRESS)}`;
+const OFFICE_MAP_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(
+  OFFICE_ADDRESS
+)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+
+const CTA = ({ showMap = false }) => {
   const [formData, setFormData] = useState({
     service: SERVICES[0],
     name: '',
@@ -30,6 +37,31 @@ const CTA = () => {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const sectionEl = sectionRef.current;
+    if (!sectionEl) return undefined;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsVisible(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.18 }
+    );
+
+    observer.observe(sectionEl);
+    return () => observer.disconnect();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,7 +87,7 @@ const CTA = () => {
 
   const getWhatsAppUrl = () => {
     const text = encodeURIComponent(
-      `Hi DCStack team! I would like to inquire about: ${formData.service}.\n` +
+      `Hi DCStack team! I would like to start a project with you.\n` +
       (formData.name ? `Name: ${formData.name}\n` : '') +
       (formData.company ? `Company: ${formData.company}\n` : '') +
       (formData.message ? `Details: ${formData.message}` : '')
@@ -64,18 +96,27 @@ const CTA = () => {
   };
 
   return (
-    <section className="cta" id="contact" aria-labelledby="cta-title">
-      <Container>
-        <div className="contact-wrapper">
-          {/* Left Column: Contact Information */}
-          <div className="contact-info">
-            <p className="contact-eyebrow">Get in touch</p>
-            <h2 id="cta-title" className="contact-title">Let's Discuss Your Project</h2>
-            <p className="contact-lead">
-              Have questions about Smart Rack monitoring, C2 Cafe POS systems, or custom software?
-              Our team in Malaysia is here to assist with technical specifications, demos, and quotes.
-            </p>
+    <section
+      ref={sectionRef}
+      className={`cta ${isVisible ? 'is-visible' : ''}`}
+      id="contact"
+      aria-labelledby="cta-title"
+    >
+      <div className="contact-hero">
+        <Container>
+          <p className="page-eyebrow">Get in touch</p>
+          <h1 id="cta-title">Let&apos;s Discuss Your Project</h1>
+          <p className="contact-hero__lead">
+            Have questions about Smart Rack monitoring, Smart POS systems, or custom software?
+            Our team in Malaysia is here to assist with technical specifications, demos, and quotes.
+          </p>
+        </Container>
+      </div>
 
+      <Container className="contact-stage">
+        <div className="contact-wrapper">
+          {/* Left Column: Contact Information + Map */}
+          <div className="contact-info">
             <div className="contact-details">
               <a href="mailto:sales@dcstack.my" className="contact-item">
                 <div className="contact-item__icon">
@@ -87,17 +128,27 @@ const CTA = () => {
                 </div>
               </a>
 
-              <a href="tel:+60126946907" className="contact-item">
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noreferrer"
+                className="contact-item"
+              >
                 <div className="contact-item__icon">
                   <Phone size={18} />
                 </div>
                 <div>
-                  <span className="contact-item__label">Phone / WhatsApp</span>
+                  <span className="contact-item__label">Phone Number</span>
                   <strong>+60 12-694 6907</strong>
                 </div>
               </a>
 
-              <div className="contact-item contact-item--address">
+              <a
+                href={OFFICE_MAPS_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="contact-item"
+              >
                 <div className="contact-item__icon">
                   <MapPin size={18} />
                 </div>
@@ -105,21 +156,20 @@ const CTA = () => {
                   <span className="contact-item__label">Office</span>
                   <strong>Eco Forest, 43500 Semenyih, Selangor, Malaysia</strong>
                 </div>
-              </div>
-            </div>
-
-            <div className="contact-whatsapp-block">
-              <a
-                href={getWhatsAppUrl()}
-                target="_blank"
-                rel="noreferrer"
-                className="contact-whatsapp-btn"
-              >
-                <MessageSquare size={18} />
-                <span>Chat on WhatsApp</span>
-                <ArrowRight size={16} />
               </a>
             </div>
+
+            {showMap && (
+              <div className="contact-map-card">
+                <iframe
+                  title="DCStack Office Location"
+                  src={OFFICE_MAP_EMBED_URL}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              </div>
+            )}
           </div>
 
           {/* Right Column: Inquiry Form */}
